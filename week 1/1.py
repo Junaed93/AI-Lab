@@ -1,7 +1,7 @@
 # random shit to learn basics of python
 print("hello world")
 a = 10
-b = 6
+b = 3
 print(a, b)
 c = "10.1"
 for i in range(a):
@@ -29,3 +29,9 @@ print("Junaed", "khandakar", sep="-")
 print(f"My name is {d} and I am {e} years old")
 
 print("My name is {} and I am {} years old".format(d, e))
+
+print(a / b)
+
+print(a // b)
+
+print(a ** b)
