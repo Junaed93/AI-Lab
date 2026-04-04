@@ -1,0 +1,19 @@
+ Sample 1 
+Optimal Cost: 4
+Optimal Path:
+(0,0) -> (1,0) -> (2,1) -> (3,2) -> (3,3)
+
+ Sample 2 
+Optimal Cost: 6
+Optimal Path:
+(0,0) -> (1,0) -> (2,1) -> (3,2) -> (3,3)
+
+ Sample 3 
+Optimal Cost: None
+Optimal Path: []
+
+ File Input 
+Optimal Cost: 4
+Optimal Path:
+(0,0) -> (1,0) -> (2,1) -> (3,2) -> (3,3)
+

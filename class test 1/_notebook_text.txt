@@ -1,0 +1,1663 @@
+--- Cell 0 (markdown) ---
+What is google colab?
+
+
+*   Google Colab (Colaboratory) is a free cloud-based Jupyter Notebook that allows you to write and run Python code without installing anything on your computer.
+*   [Google Colab Setup](https://www.youtube.com/watch?v=RTOOo39iaSU
+)
+
+
+--- Cell 1 (markdown) ---
+Why Use Google Colab?
+
+
+1.   Runs in the Cloud
+2.   Free Access to GPUs & TPUs
+3.   Auto-Saves Notebooks in Google Drive
+4.   Easy to Share
+
+
+--- Cell 2 (markdown) ---
+Print Hello World
+
+--- Cell 3 (code) ---
+print("Hello World")
+
+--- Cell 4 (markdown) ---
+# Basics
+
+--- Cell 5 (markdown) ---
+## Variable
+Python is a dynamically typed programming language, meaning that variables do not need explicit type declarations. Instead, the Python interpreter automatically determines the data type of a variable at runtime based on the assigned value.
+
+
+--- Cell 6 (code) ---
+x = 10
+print(type(x))
+
+--- Cell 7 (code) ---
+print(x)
+
+--- Cell 8 (code) ---
+x = "Hello"
+print(type(x))
+
+--- Cell 9 (code) ---
+x = 3.14
+print(type(x))
+
+--- Cell 10 (code) ---
+a = 5
+b = 5
+print(id(a), id(b))
+
+--- Cell 11 (code) ---
+a = 10
+print(id(a), id(b))
+
+--- Cell 12 (code) ---
+name = "sahid"
+name[0] = "R"
+
+--- Cell 13 (code) ---
+# name = "sahid"
+# print(name[0])
+
+--- Cell 14 (code) ---
+n = "sahid"
+print(name[0])
+
+--- Cell 15 (code) ---
+for char in n:
+  print(char)
+
+--- Cell 16 (markdown) ---
+
+
+--- Cell 17 (markdown) ---
+## Casting
+Python allows two types of type conversion:
+
+1.   Implicit Type Casting (Done automatically by Python)
+2. Explicit Type Casting (Manually done using built-in functions)
+
+--- Cell 18 (code) ---
+# Implicit Type Casting (Automatic Conversion)
+a = 5    # int
+b = 2.5  # float
+c = a + b  # int + float → float
+
+print(c)
+print(type(c))
+
+--- Cell 19 (code) ---
+a, b = 5, 10
+
+--- Cell 20 (code) ---
+# Explicit Type Casting (Manual Conversion)
+x = "10"
+y = "5"
+
+z = x + y
+
+print(z, type(z))
+
+--- Cell 21 (code) ---
+x = "10"  # String
+y = int(x)  # Convert string to int
+
+--- Cell 22 (code) ---
+print(y, type(y))
+
+--- Cell 23 (code) ---
+z = float(y)  # Convert int to float
+
+--- Cell 24 (code) ---
+print(z, type(z))
+
+--- Cell 25 (code) ---
+x = 200
+
+--- Cell 26 (code) ---
+a = str(x) # a --> 200200
+print(a+a)
+
+--- Cell 27 (code) ---
+a = 'mustakim'
+x = 500
+s = a + str(x)
+print(s)
+
+--- Cell 28 (code) ---
+s = a * 3
+print(s)
+
+--- Cell 29 (code) ---
+a = 5
+b = 7
+
+--- Cell 30 (code) ---
+a, b
+
+--- Cell 31 (code) ---
+a, b = 10,20
+
+--- Cell 32 (code) ---
+# temp = a
+# a = b
+# b = temp
+a, b  = b, a
+
+--- Cell 33 (code) ---
+a, b
+
+--- Cell 34 (markdown) ---
+## Different Ways to Use print() in Python
+
+--- Cell 35 (markdown) ---
+Output:
+```
+The number is 10
+```
+
+--- Cell 36 (code) ---
+print("Hello, World!", 100)
+print(100)
+
+--- Cell 37 (code) ---
+name = "Sahid"
+age = 25
+print("Name:", name, "Age:", age)
+
+--- Cell 38 (code) ---
+print("Python", "is", "awesome", sep="->")
+
+--- Cell 39 (code) ---
+print("Hello", end="\n")
+print("World!")
+
+--- Cell 40 (code) ---
+name = "Ratul"
+age = 30
+
+--- Cell 41 (code) ---
+print(f"mY NaMe IS {name}")
+
+--- Cell 42 (code) ---
+print(f"My name is {name} and I am {age} years old.")
+
+--- Cell 43 (code) ---
+print("My name is {} and I am {} years old.".format(name, age))
+
+--- Cell 44 (code) ---
+print("My name is %s and I am %d years old." % (name, age))
+
+--- Cell 45 (markdown) ---
+## Arithmetic Operators
+
+--- Cell 46 (code) ---
+a = 10
+b = 3
+
+--- Cell 47 (code) ---
+print(-10 % 3)
+
+--- Cell 48 (code) ---
+print("Addition:", a + b)
+print("Subtraction:", a - b)
+print("Multiplication:", a * b)
+print("Division:", a / b)
+print("Floor Division:", a // b)
+print("Modulus:", a % b)
+print("Exponentiation:", a ** b)
+
+--- Cell 49 (code) ---
+print(-10 % 3)  # (Python keeps remainder positive)
+
+--- Cell 50 (markdown) ---
+Class Work
+
+Equation:
+```
+(x + y) * (x - y) / y
+```
+Here,
+```
+x = 5 and y = 2
+```
+Output:
+```
+Result: 10.5
+```
+
+--- Cell 51 (code) ---
+x = 5
+y = 2
+
+--- Cell 52 (code) ---
+result = (x + y) * (x - y) / y
+print("Result:", result)
+
+--- Cell 53 (markdown) ---
+Python doesn’t have a direct ceil division operator, but we can achieve it using the math.ceil() function.
+
+--- Cell 54 (code) ---
+import math
+
+--- Cell 55 (code) ---
+a = 10
+b = 3
+
+--- Cell 56 (code) ---
+ceil_div = math.ceil(a / b)
+print(ceil_div)
+
+--- Cell 57 (markdown) ---
+If you want to perform ceil division manually, you can use this formula:
+
+(a + b - 1) // b
+
+--- Cell 58 (markdown) ---
+
+
+--- Cell 59 (code) ---
+print(((a+b-1)//b))
+
+--- Cell 60 (markdown) ---
+## Input
+
+--- Cell 61 (code) ---
+a = input()
+
+--- Cell 62 (code) ---
+a
+
+--- Cell 63 (code) ---
+a = input()
+b = input()
+
+--- Cell 64 (code) ---
+a,b
+
+--- Cell 65 (code) ---
+a + b
+
+--- Cell 66 (code) ---
+a = int(input('Enter a number: '))
+b = int(input('Enter another number: '))
+
+--- Cell 67 (code) ---
+a + b
+
+--- Cell 68 (code) ---
+name = input("Enter your name: ")
+age = int(input("Enter your age: "))
+
+--- Cell 69 (code) ---
+name, age
+
+--- Cell 70 (code) ---
+height = float(input("Enter your height: "))
+is_student = bool(int(input("Are you a student? (1 for Yes, 0 for No): ")))
+
+--- Cell 71 (code) ---
+print(f"Height is: {height}")
+
+--- Cell 72 (code) ---
+print(f"Is a student: {is_student}")
+
+--- Cell 73 (markdown) ---
+## Conditional Statements (if, elif, else)
+**NO CURLY BRACES. INDENTATION MATTERS.**
+
+--- Cell 74 (code) ---
+age = 18
+if age >= 18:
+    print("You are an adult.")
+
+--- Cell 75 (code) ---
+age = 16
+if age >= 18:
+    print("You are an adult.")
+else:
+    print("You are a minor.")
+
+--- Cell 76 (code) ---
+marks = 75
+
+if marks >= 90:
+    print("Grade: A")
+elif marks >= 80:
+    print("Grade: B")
+elif marks >= 70:
+    print("Grade: C")
+else:
+    print("Grade: F")
+
+--- Cell 77 (code) ---
+a, b = 2, 33
+if (a < b):
+    print('Hello')
+    if a < 10:
+        print( a, ' is less than 10')
+
+--- Cell 78 (code) ---
+num = 10
+
+if num > 0:
+    print("Positive Number")
+    if num % 2 == 0:
+        print("Even Number")
+
+--- Cell 79 (code) ---
+# Single-line if statement
+age = 20
+status = "Adult" if age >= 18 else "Minor"
+print(status)
+
+--- Cell 80 (markdown) ---
+Logical Operators (and, or, not)
+
+--- Cell 81 (code) ---
+age = 25
+has_ID = True
+
+if age >= 18 and has_ID:
+    print("Allowed to enter.")
+else:
+    print("Entry Denied.")
+
+--- Cell 82 (code) ---
+is_raining = False
+
+if not is_raining:
+    print("Go outside!")
+else:
+    print("Stay indoors!")
+
+--- Cell 83 (code) ---
+a = 2
+if a > 1 and a <= 10: #
+    print('1 < a <= 10')
+if a == 2 or a >= 1: #
+    print('a is greater than or equal to 1')
+if a == 2: #
+    print('a is 2')
+if a != 2: # no
+    print('a is not 2')
+
+--- Cell 84 (code) ---
+a = "2"
+
+--- Cell 85 (code) ---
+if a is "2": #
+    print('a is 2')
+if a is not "4": #
+    print('a is not 4')
+
+--- Cell 86 (markdown) ---
+`is` checks identity
+
+It checks whether two variables refer to the exact same object in memory.
+
+`==` checks value
+
+It checks whether the values are equal.
+
+--- Cell 87 (code) ---
+# is/is not should not be used with integers (literals).
+
+--- Cell 88 (code) ---
+a = "hello"
+b = "hello"
+
+print(a == b)  # True
+print(a is b)  # Sometimes True, sometimes False
+
+--- Cell 89 (code) ---
+a = "hello world"
+b = "".join(["hello", " world"])
+
+print(a == b)
+print(a is b)
+
+--- Cell 90 (markdown) ---
+## Loops
+
+--- Cell 91 (markdown) ---
+Loop with range()
+```
+for i in range(start, stop, step):
+    # Code block
+```
+
+--- Cell 92 (code) ---
+for i in range(5):  # Loops from 0 to 4
+    print("Iteration:", i)
+
+--- Cell 93 (code) ---
+for i in range(2, 5): # from 1 to 5
+    print(i)
+
+--- Cell 94 (code) ---
+for i in range(0, 10, 2):  # Steps of 2
+    print(i)
+
+--- Cell 95 (markdown) ---
+while Loop
+```
+while condition:
+    # Code block
+  
+```
+
+--- Cell 96 (code) ---
+x = 1
+while x <= 5:
+    print(x)
+    x += 1
+
+--- Cell 97 (code) ---
+x = 1
+while True:
+    print(x)
+    x += 1
+    if x > 5:
+        break
+
+--- Cell 98 (code) ---
+for i in range(5):
+    if i == 3:
+        break  # Exits loop at 3
+    print(i)
+
+--- Cell 99 (code) ---
+for i in range(5):
+    if i == 2:
+        continue
+    print(i)
+
+--- Cell 100 (code) ---
+# Nester Loop
+for outer in range(3):
+    for inner in range(2):
+      print(f"Outer: {outer}, Inner: {inner}")
+
+--- Cell 101 (markdown) ---
+
+
+--- Cell 102 (markdown) ---
+```
+n = 0
+while True:
+    print(n)
+    # n++, n--, --n, ++n is not supported
+    n += 1
+    n = n+1
+    n = n-1
+    n -= 1
+    n *= 2
+    n /= 2
+    n += 1
+    if n == 5: break
+```
+
+What will be the output?
+
+--- Cell 103 (code) ---
+n = 0
+while True:
+    print(n)
+    # n++, n--, --n, ++n is not supported
+    n += 1
+    n = n+1
+    n = n-1
+    n -= 1
+    n *= 2
+    n /= 2
+    n += 1
+    if n == 5: break
+
+--- Cell 104 (markdown) ---
+Bonus:
+```
+*
+* *
+* * *
+* * * *
+* * * * *
+```
+
+```
+0, 1, 1, 2, 3, 5, 8, 13, 21, 34, …
+```
+
+--- Cell 105 (code) ---
+rows = 5
+
+for i in range(1, rows + 1):
+    print("* " * i)
+
+--- Cell 106 (code) ---
+rows = int(input("Enter a number: "))
+
+--- Cell 107 (code) ---
+a, b = 0, 1
+
+--- Cell 108 (code) ---
+print(f"{a},{b},", end="")
+for i in range(1, rows+1):
+  next = a + b
+  print(next, end="")
+  if(i!=rows):
+    print(f',', end="")
+  a = b
+  b = next
+
+--- Cell 109 (markdown) ---
+## List
+
+Python’s list is a dynamic, flexible data structure that differs from C arrays and Java’s ArrayList or LinkedList.
+
+--- Cell 110 (code) ---
+my_list = [1, 2, 3, 4, 5]
+print(my_list)
+
+--- Cell 111 (code) ---
+mixed_list = [10, "Python", 3.14, True]
+print(mixed_list)
+
+--- Cell 112 (code) ---
+arr = []
+
+--- Cell 113 (code) ---
+import sys
+
+--- Cell 114 (code) ---
+print(sys.getsizeof(arr))
+
+--- Cell 115 (code) ---
+arr.append(1)
+print(sys.getsizeof(arr))
+
+--- Cell 116 (markdown) ---
+List Object
+
+*   length      -> number of elements currently stored
+*   capacity    -> number of elements it can hold before resizing
+*   pointer to data -> address of the array storing element pointers
+*   type info   -> tells Python this object is a list
+
+
+
+
+
+--- Cell 117 (code) ---
+print("Empty List:", sys.getsizeof([]), "bytes")
+print("Empty Tuple:", sys.getsizeof(()), "bytes")
+print("Integer:", sys.getsizeof(1), "bytes")
+print("Float:", sys.getsizeof(1.0), "bytes")
+print("String:", sys.getsizeof("a"), "bytes")
+print("Boolean:", sys.getsizeof(True), "bytes")
+
+--- Cell 118 (markdown) ---
+Structure of a Python Integer in Memory
+
+```
+PyObject_HEAD (Metadata)
+│
+├── Type (int)
+├── Reference Count
+├── Integer Value (10)
+```
+
+*   C int only stores 10 (4 bytes),
+*   Python int stores 10 + extra metadata
+
+--- Cell 119 (markdown) ---
+Adding Elements to a List
+
+--- Cell 120 (code) ---
+my_list = [1, 2, 3]
+my_list.append(4)  # Adds 4 at the end
+print(my_list)
+
+--- Cell 121 (code) ---
+my_list.insert(1, "Hello")  # Inserts "Hello" at index 1
+print(my_list)
+
+--- Cell 122 (markdown) ---
+
+
+--- Cell 123 (code) ---
+my_list.extend([5, 6, 7])  # Adds multiple elements
+print(my_list)
+
+--- Cell 124 (markdown) ---
+Removing Elements from a List
+
+--- Cell 125 (code) ---
+my_list = [10, 20, 30, 40, 50]
+
+--- Cell 126 (code) ---
+my_list.pop()  # Removes last element (50)
+print(my_list)
+
+--- Cell 127 (code) ---
+my_list.pop(1)  # Removes element at index 1 (20)
+print(my_list)
+
+--- Cell 128 (code) ---
+my_list.remove(30)  # Removes first occurrence of 30
+print(my_list)
+
+--- Cell 129 (code) ---
+my_list.clear()  # Empties the list
+print(my_list)
+
+--- Cell 130 (code) ---
+fruits = ["Apple", "Banana", "Cherry"]
+for fruit in fruits:
+    print(fruit)
+
+--- Cell 131 (code) ---
+fruits = ["Apple", "Banana", "Cherry"]
+for index, fruit in enumerate(fruits):
+    print(index, "->", fruit)
+
+--- Cell 132 (code) ---
+for i, value in enumerate(fruits, start=1):
+    print(i, value)
+
+--- Cell 133 (markdown) ---
+Sorting & Reversing a List
+
+--- Cell 134 (code) ---
+nums = [5, 2, 8, 1, 3]
+
+nums.sort()  # Sort in ascending order
+print(nums)
+
+nums.sort(reverse=True)  # Sort in descending order
+print(nums)
+
+nums.reverse()  # Reverse the list
+print(nums)
+
+--- Cell 135 (markdown) ---
+Copying a List
+
+--- Cell 136 (code) ---
+original = [1, 2, 3]
+copy1 = original
+copy2 = original.copy()
+copy1[0] = 100
+print(original)
+print(copy2)
+
+--- Cell 137 (markdown) ---
+Checking if an Item Exists in a List
+
+--- Cell 138 (code) ---
+fruits = ["Apple", "Banana", "Cherry"]
+
+print("Apple" in fruits)
+print("Mango" not in fruits)
+
+--- Cell 139 (code) ---
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+--- Cell 140 (code) ---
+for row in matrix:
+  print(row)
+
+--- Cell 141 (code) ---
+for row in matrix:
+  for element in row:
+    print(element, end=" ")
+  print()
+
+--- Cell 142 (code) ---
+for row in matrix:
+    row_str = ""
+    for i in range(len(row)):
+        row_str += str(row[i])
+        if i < len(row) - 1:
+            row_str += ","
+    print(row_str)
+
+--- Cell 143 (code) ---
+numbers = [1, 2, 3, 4]
+result = ",".join([num for num in numbers])
+print(result)
+
+--- Cell 144 (code) ---
+numbers = [1, 2, 3, 4]
+result = ",".join([str(num) for num in numbers])
+print(result)
+
+--- Cell 145 (code) ---
+numbers = [[1, 2, 3], [4]]
+r = (num for row in numbers for num in row)
+result = ",".join([str(num) for row in numbers for num in row])
+print(result)
+
+--- Cell 146 (code) ---
+
+
+--- Cell 147 (code) ---
+numbers = [[1, 2, 3], [4,2]]
+
+result = "\n".join([",".join([str(num) for num in row]) for row in numbers])
+print(result)
+
+--- Cell 148 (markdown) ---
+## Tuple
+
+--- Cell 149 (markdown) ---
+A tuple is an immutable sequence in Python used to store multiple items in a single variable.
+```
+tuple_name = (item1, item2, item3, ...)
+```
+Characteristics of Tuples:
+* Ordered → Elements have a fixed order.
+* Immutable → Cannot be changed after creation.
+* Allow Duplicates → Can contain repeated values.
+* Can store multiple data types → Numbers, strings, booleans, other tuples, etc.
+* Can be indexed and sliced → Just like lists.
+
+--- Cell 150 (code) ---
+my_tuple = (10, 20, 30)
+print(my_tuple)
+
+--- Cell 151 (code) ---
+my_tuple = 1, 2, 3
+print(my_tuple)
+
+--- Cell 152 (code) ---
+single_tuple = (5,)
+print(single_tuple)
+print(type(single_tuple))
+
+--- Cell 153 (code) ---
+# Without the comma, it's just an integer
+a_tuple = (5)
+print(type(a_tuple))
+
+--- Cell 154 (markdown) ---
+Creating a Tuple Using tuple() Constructor
+
+--- Cell 155 (code) ---
+my_tuple = tuple([1, 2, 3])  # Convert list to tuple
+print(my_tuple)
+
+--- Cell 156 (markdown) ---
+Accessing Tuple Elements
+
+--- Cell 157 (code) ---
+fruits = ("apple", "banana", "cherry")
+print(fruits[0])
+print(fruits[2])
+
+--- Cell 158 (markdown) ---
+Negative Indexing
+
+--- Cell 159 (code) ---
+print(fruits[-1])
+print(fruits[-2])
+
+--- Cell 160 (markdown) ---
+Tuple Operations
+
+--- Cell 161 (code) ---
+tuple1 = (1, 2, 3)
+tuple2 = (4, 5, 6)
+result = tuple1 + tuple2
+print(result)
+
+--- Cell 162 (markdown) ---
+Tuple Immutability
+
+--- Cell 163 (code) ---
+my_tuple = (1, 2, 3)
+my_tuple[1] = 5
+
+--- Cell 164 (code) ---
+fruits = ("apple", "banana", "cherry")
+
+for fruit in fruits:
+    print(fruit)
+
+--- Cell 165 (code) ---
+numbers = (10, 20, 30, 20, 40)
+
+print(numbers.count(20))
+print(numbers.index(30))
+
+--- Cell 166 (code) ---
+person = "SHM", 25, "Engineer"
+print(person)
+
+--- Cell 167 (code) ---
+name, age, profession = person
+print(name)
+print(age)
+print(profession)
+
+--- Cell 168 (markdown) ---
+The ```enumerate()``` function returns an enumerate object, which produces tuples containing both the index and the corresponding item from the sequence.
+```
+enumerate(iterable, start=0)
+```
+* iterable: Any iterable object (list, tuple, string, etc.).
+* start: The starting index (default is 0).
+
+--- Cell 169 (code) ---
+fruits = ["Apple", "Banana", "Cherry"]
+
+for index, fruit in enumerate(fruits, start=1):
+    print(index, "->", fruit)
+
+--- Cell 170 (markdown) ---
+Changing the Start Index
+
+--- Cell 171 (code) ---
+fruits = ["Apple", "Banana", "Cherry"]
+indexed_fruits = list(enumerate(fruits, start=1))
+print(indexed_fruits)
+
+--- Cell 172 (markdown) ---
+Using enumerate() with a Tuple
+
+--- Cell 173 (code) ---
+numbers = (10, 20, 30)
+
+for index, num in enumerate(numbers):
+    print(f"Index: {index}, Value: {num}")
+
+--- Cell 174 (code) ---
+## print all pair of numbers from a list
+
+--- Cell 175 (code) ---
+l = [1, 2, 3, 4, 5]
+
+for i in range(len(l)):
+    for j in range(i+1, len(l)):
+        print(l[i], l[j])
+
+--- Cell 176 (code) ---
+arr =  []
+for i in range(2, 30, 2):
+    arr.append(i)
+print(arr)
+
+--- Cell 177 (markdown) ---
+How ```enumerate()``` Works Internally
+```
+def my_enumerate(iterable, start=0):
+    index = start
+    for item in iterable:
+        yield index, item
+        index += 1
+```
+```
+for i, fruit in my_enumerate(fruits):
+    print(i, fruit)
+```
+
+
+--- Cell 178 (markdown) ---
+## Slicing
+Slicing is a powerful feature in Python that allows you to extract a portion of a sequence (such as lists, tuples, strings, and more.
+The slicing syntax follows this structure:
+```
+sequence[start:stop:step]
+```
+
+*   start (optional): The index where the slice starts (inclusive). Default is 0.
+*   stop (optional): The index where the slice stops (exclusive). If omitted, it goes to the end.
+* step (optional): The step size (or stride). Default is 1
+
+--- Cell 179 (markdown) ---
+### Basic Slicing
+
+--- Cell 180 (code) ---
+numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+--- Cell 181 (code) ---
+print(numbers[2:5])
+
+--- Cell 182 (code) ---
+print(numbers[:4])
+
+--- Cell 183 (code) ---
+print(numbers[5:])
+
+--- Cell 184 (code) ---
+print(numbers[:])
+
+--- Cell 185 (markdown) ---
+### Using Step in Slicing
+
+--- Cell 186 (code) ---
+print(numbers[::2])
+
+--- Cell 187 (code) ---
+print(numbers[::3])
+
+--- Cell 188 (markdown) ---
+### Negative Indexing in Slicing
+
+--- Cell 189 (code) ---
+numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+--- Cell 190 (code) ---
+print(numbers[-3:])
+
+--- Cell 191 (code) ---
+print(numbers[:-2])
+
+--- Cell 192 (code) ---
+print(numbers[::-1])
+
+--- Cell 193 (code) ---
+print(numbers[::-2])
+
+--- Cell 194 (markdown) ---
+### Slicing Strings
+
+--- Cell 195 (code) ---
+text = "PythonSlicing"
+
+--- Cell 196 (code) ---
+print(text[0:6])
+
+--- Cell 197 (code) ---
+print(text[::2])
+
+--- Cell 198 (code) ---
+print(text[::-1])
+
+--- Cell 199 (markdown) ---
+### Modifying Lists Using Slicing
+
+--- Cell 200 (code) ---
+nums = [1, 2, 3, 4, 5]
+
+--- Cell 201 (code) ---
+nums[1:3] = [9, 8]
+
+--- Cell 202 (code) ---
+print(nums)
+
+--- Cell 203 (code) ---
+nums = [1, 2, 3, 4, 5]
+
+--- Cell 204 (code) ---
+# delete
+del nums[1:3]
+
+--- Cell 205 (code) ---
+print(nums)
+
+--- Cell 206 (markdown) ---
+Slicing Tuples
+
+--- Cell 207 (code) ---
+numbers = (10, 20, 30, 40, 50)
+
+print(numbers[1:4])
+print(numbers[:3])
+print(numbers[2:])
+print(numbers[::-1])
+
+--- Cell 208 (markdown) ---
+
+
+--- Cell 209 (markdown) ---
+## Dictionary
+
+A dictionary (dict) in Python is a collection of key-value pairs.
+
+1.  Keys are unique and immutable (like strings, numbers, or tuples).
+
+2. Values can be any data type (lists, other dictionaries, etc.).
+
+--- Cell 210 (code) ---
+student = {
+    "name": "SHM",
+    "age": 95,
+    "grade": "F"
+    }
+print(student)
+
+--- Cell 211 (code) ---
+student = dict(name="SHMm", age=20, grade="A")
+print(student)
+
+--- Cell 212 (code) ---
+empty_dict = {}
+print(empty_dict)
+
+--- Cell 213 (markdown) ---
+Accessing Values
+
+--- Cell 214 (code) ---
+print(student["name"])
+print(student.get("age"))
+print(student.get("gender", "Not Found"))
+
+--- Cell 215 (markdown) ---
+Modifying a Dictionary
+
+--- Cell 216 (code) ---
+student["age"] = 21
+student["city"] = "Dhaka"
+del student["grade"]
+
+print(student)
+
+--- Cell 217 (code) ---
+for key in student:
+    print(key, "->", student[key])
+
+--- Cell 218 (code) ---
+for value in student.values():
+    print(value)
+
+--- Cell 219 (code) ---
+for key, value in student.items():
+    print(key, "->", value)
+
+--- Cell 220 (code) ---
+student = {"name": "SHM", "age": 95, "grade": "F"}
+
+--- Cell 221 (code) ---
+print(student.keys())
+print(student.values())
+print(student.items())
+
+student.pop("age")
+student.popitem()
+print(student)
+
+--- Cell 222 (code) ---
+student = {"name": "SHM", "age": 95, "grade": "F"}
+
+--- Cell 223 (code) ---
+print(list(student.keys()))
+print(list(student.values()))
+print(list(student.items()))
+
+--- Cell 224 (code) ---
+for key in student.keys():
+    print(key)
+for value in student.values():
+    print(value)
+for key, value in student.items():
+    print(key, ":", value)
+
+--- Cell 225 (markdown) ---
+Creating a Dictionary Using Loops
+
+--- Cell 226 (code) ---
+squares = {x: x*x for x in range(1, 6)}
+print(squares)
+
+--- Cell 227 (code) ---
+grades = {"Sahid": 85, "Hossain": 70, "Ratul": 90}
+
+--- Cell 228 (code) ---
+passed_students = {k: v for k, v in grades.items() if v > 75}
+print(passed_students)
+
+--- Cell 229 (code) ---
+students = {
+    "Sahid": {"age": 20, "grade": "A"},
+    "Ratul": {"age": 22, "grade": "B"}
+}
+
+print(students["Sahid"]["age"])
+
+--- Cell 230 (code) ---
+for student, details in students.items():
+    print(f"Student: {student}")
+    for key, value in details.items():
+        print(f"  {key}: {value}")
+
+--- Cell 231 (code) ---
+students = {
+    "Sahid": {"age": 20, "grade": "A"},
+    "Ratul": [1,2,3],
+    "Mustakim": 4
+}
+
+--- Cell 232 (code) ---
+for name, details in students.items():
+    print(f"Student: {name}")
+    if isinstance(details, dict):
+        for key, value in details.items():
+            print(f"  {key}: {value}")
+    elif isinstance(details, list):
+        print("  Values:", details)
+    else:
+        print(f"  Values: {details}")
+
+--- Cell 233 (markdown) ---
+Merging Dictionaries
+
+--- Cell 234 (code) ---
+dict1 = {"name": "Ratul", "age": 20}
+dict2 = {"city": "Dhaka", "age": 21}
+
+dict1.update(dict2)
+print(dict1)
+
+--- Cell 235 (markdown) ---
+
+
+--- Cell 236 (code) ---
+person = {
+    "name": "Sahid",
+    "email": "sahidhossainmustakim@gmail.com",
+    "joined": 2024,
+    10: "secret",
+    5: "hidden",
+    "info": ["red", 42, "science"]
+}
+
+--- Cell 237 (code) ---
+for key in person:
+    print(key, "->", person[key])
+
+--- Cell 238 (markdown) ---
+Write a code that counts the frequency of each letter in a sentence
+
+```
+sentence = "I study in UIU"
+
+freq = {}
+```
+
+--- Cell 239 (code) ---
+sentence = "I study in UIU"
+
+freq = {}
+
+--- Cell 240 (code) ---
+for i in range(len(sentence)):
+    # print(sentence[i])
+    char = sentence[i]
+    if char not in freq:
+        freq[char] = 0
+    freq[char] = freq[char]+1
+
+for char in freq:
+    print(f"{char}: {freq[char]}")
+
+--- Cell 241 (code) ---
+sorted_freq = dict(sorted(freq.items()))
+
+for char, count in sorted_freq.items():
+    print(f"{char}: {count}")
+
+--- Cell 242 (markdown) ---
+## Function
+
+--- Cell 243 (code) ---
+# int sum(int a, int b){
+#     return a + b;
+# }
+
+--- Cell 244 (code) ---
+def sum(a, b):
+    return a + b
+
+--- Cell 245 (code) ---
+print(sum(3, 4))
+print(sum('a', 'b'))
+
+--- Cell 246 (code) ---
+def sum(a, b):
+    return a + b
+
+--- Cell 247 (code) ---
+def hello(name):
+    name = name.capitalize()
+    print('Hello, ',name)
+
+hello('Ratul')
+
+--- Cell 248 (code) ---
+def test(arr):
+  return (arr + arr)
+
+print(test([1,2,4,6,7]))
+print(test(100))
+print(test("good"))
+
+--- Cell 249 (code) ---
+def minmax(arr):
+  return min(arr), max(arr)
+
+--- Cell 250 (code) ---
+listt = [1, 0, 9, 8, -1]
+
+--- Cell 251 (code) ---
+min_, max_ = minmax(listt)
+print(f'min: {min_}, max: {max_}')
+
+--- Cell 252 (code) ---
+a = minmax(listt)
+print(a[0], a[1])
+
+--- Cell 253 (code) ---
+def canvote(age):
+    if age >= 18:
+        print("can vote at the age", age)
+        return True
+    else:
+        print("can't vote at the age", age)
+        return False
+
+--- Cell 254 (code) ---
+print(canvote(132), '\n')
+print(canvote(age=31), '\n')
+
+--- Cell 255 (code) ---
+print(canvote(), '\n')
+
+--- Cell 256 (code) ---
+def canvote(age=0):
+    if age >= 18:
+        print("can vote at the age", age)
+        return True
+    else:
+        print("can't vote at the age", age)
+        return False
+
+print(canvote(), '\n')
+
+--- Cell 257 (code) ---
+def canvote(is_citizen, age=0):
+    if not is_citizen:
+        print("can't vote", age)
+        return False
+    if age >= 18:
+        print("can vote at the age", age)
+        return True
+    else:
+        print("can't vote at the age", age)
+        return False
+
+--- Cell 258 (code) ---
+print(canvote(True, 132), '\n')
+print(canvote(False, age=31), '\n')
+print(canvote(), '\n') # error: missing 1 argument
+# print(canvote(is_citizen=False, 31), '\n') # error: positional argument follows keyword argument
+
+--- Cell 259 (markdown) ---
+```*args (Non-keyword arguments)```
+
+How It Works?
+- ```*args``` collects all positional arguments as a tuple.
+- It allows calling the function with different numbers of arguments.
+
+--- Cell 260 (code) ---
+def add_numbers(*args):
+    return sum(args)
+
+print(add_numbers(2, 3))
+print(add_numbers(1, 2, 3, 4))
+
+--- Cell 261 (markdown) ---
+We can also use *args to unpack a list or tuple when calling a function.
+
+--- Cell 262 (code) ---
+numbers = [1, 2, 3, 4]
+print(add_numbers(*numbers))
+
+--- Cell 263 (markdown) ---
+```**kwargs``` (Keyword arguments)
+
+- ```**kwargs``` allows a function to accept any number of keyword arguments.
+
+- The arguments are passed as a dictionary inside the function.
+
+--- Cell 264 (code) ---
+def print_details(**kwargs):
+    for key, value in kwargs.items():
+        print(f"{key}: {value}")
+
+--- Cell 265 (code) ---
+print_details(name="SHM", age=25, city="Dhaka")
+
+--- Cell 266 (markdown) ---
+We can also use **kwargs to unpack a dictionary when calling a function.
+
+
+--- Cell 267 (code) ---
+info = {'name': 'Ratul', 'age': 30}
+print_details(**info)
+
+--- Cell 268 (code) ---
+def full_function(a, b, *args, **kwargs):
+    print(f"a: {a}, b: {b}")
+    print("args:", args)
+    print("kwargs:", kwargs)
+
+full_function(1, 2, 3, 4, 5, name="Messi", age=36)
+
+--- Cell 269 (code) ---
+def full_function(a, *args, b, **kwargs):
+    print(f"a: {a}, b: {b}")
+    print("args:", args)
+    print("kwargs:", kwargs)
+
+full_function(1, 2, 3, 4, 5, name="Messi", age=36)
+
+--- Cell 270 (code) ---
+def full_function(a, *args):
+    print(f"a: {a}, b: {b}")
+    print("args:", args)
+    print("kwargs:", kwargs)
+
+full_function(1, 2, 3, 4, 5, name="Messi", age=36)
+
+--- Cell 271 (code) ---
+def full_function(a, *args):
+    print(f"a: {a}, b: {b}")
+    print("args:", args)
+
+full_function(1, 2, 3, 4, 5, "Messi", 36)
+
+--- Cell 272 (markdown) ---
+| `Operator`  | `Used For` | `Example `|
+|-----------|-----------------------------------------|----------------------------------------------|
+|*| Unpacking lists/tuples| a, *b = [1, 2, 3]|
+|**| Unpacking dictionaries| greet(**{"name": "Aayan"})|
+|*args| Collecting multiple positional arguments|def func(*args): print(args)|
+| **kwargs|Collecting multiple keyword arguments| def func(**kwargs): print(kwargs)|
+
+--- Cell 273 (code) ---
+
+
+--- Cell 274 (markdown) ---
+## File
+
+--- Cell 275 (markdown) ---
+Opening a File
+```
+file = open("filename.txt", mode)
+```
+
+- "r"	Read mode (default). Raises an error if the file doesn’t exist.
+- "w"	Write mode. Creates a new file or overwrites an existing one.
+- "a"	Append mode. Adds data to the end of the file without deleting existing content.
+- "x"	Exclusive creation. Fails if the file already exists.
+- "b"	Binary mode (used with "rb", "wb", etc.) for non-text files like images.
+- "t"	Text mode (default). Handles text files.
+- "+"	Read and write mode (used with "r+", "w+", "a+").
+
+--- Cell 276 (code) ---
+file = open("example.txt", "w")
+
+--- Cell 277 (markdown) ---
+
+
+--- Cell 278 (code) ---
+file = open("example.txt", "r")
+content = file.read()
+print(content)
+file.close()
+
+--- Cell 279 (code) ---
+file = open("example.txt", "r")
+content = file.read(10)
+print(content)
+file.close()
+
+--- Cell 280 (code) ---
+file = open("example.txt", "r")
+line1 = file.readline()
+print(line1)
+file.close()
+
+--- Cell 281 (code) ---
+file = open("example.txt", "r")
+lines = file.readlines()
+print(lines)
+file.close()
+
+--- Cell 282 (code) ---
+clean_lines = [line.strip() for line in lines]
+print(clean_lines)
+
+--- Cell 283 (code) ---
+file = open("example.txt", "w")
+file.write("Hello, world!\n")
+file.close()
+
+--- Cell 284 (code) ---
+file = open("example.txt", "a")
+file.write("This is new content.")
+file.close()
+
+--- Cell 285 (markdown) ---
+Using with Statement
+
+--- Cell 286 (code) ---
+with open("example.txt", "r") as file:
+    content = file.read()
+    print(content)
+    # File is automatically closed after this block
+
+--- Cell 287 (code) ---
+import os
+
+if os.path.exists("example.txt"):
+    print("File exists!")
+else:
+    print("File not found!")
+
+--- Cell 288 (code) ---
+if os.path.exists("example.txt"):
+    os.remove("example.txt")
+    print("File deleted!")
+else:
+    print("File does not exist!")
+
+--- Cell 289 (code) ---
+try:
+    with open("example.txt", "r") as file:
+        print(file.read())
+except FileNotFoundError:
+    print("File does not exist!")
+except Exception as e:
+    print(f"An error occurred: {e}")
+
+--- Cell 290 (markdown) ---
+Count Words in a File
+
+Write a Python program that reads a file and counts the number of words in it.
+text.txt:
+```
+Hello World
+This is a test file.
+Python is great!
+```
+
+Output:
+```
+Total words: 10
+```
+
+--- Cell 291 (code) ---
+with open("text.txt", "w") as file:
+    file.write("Hello World\n")
+    file.write("This is a test file.\n")
+    file.write("Python is great!\n")
+
+--- Cell 292 (code) ---
+ def count_words(filename):
+    with open(filename, "r") as file:
+        text = file.read()
+        words = text.split()
+        print("Total words:", len(words))
+
+count_words("text.txt")
+
+--- Cell 293 (markdown) ---
+Find Longest Word
+
+Write a Python program that reads a file and finds the longest word in it.
+```
+apple banana watermelon mango
+```
+Output:
+```
+Longest word: watermelon
+```
+
+--- Cell 294 (code) ---
+def writeFile(filename):
+  with open(filename, "w") as file:
+    n = input("Enter words: ")
+    file.write(n)
+
+--- Cell 295 (code) ---
+writeFile("text.txt")
+
+--- Cell 296 (code) ---
+def find_longest_word(filename):
+    with open(filename, "r") as file:
+      read = file.read()
+      words = read.split()
+      longest_word = max(words, key=len)
+      print("Longest word:", longest_word)
+
+find_longest_word("text.txt")
+
+--- Cell 297 (code) ---
+def search_word(filename, word):
+    with open(filename, "r") as file:
+        lines = file.readlines()
+
+    for i, line in enumerate(lines, start=1):
+        if word in line:
+            print(f"Found '{word}' on line {i}")
+
+search_word("text.txt", "mango")
+
+--- Cell 298 (code) ---
+
+
+--- Cell 299 (code) ---
+
+
+--- Cell 300 (markdown) ---
+## Practice Problem
+
+1. Write a program that asks the user for a list of numbers and sorts them in ascending order manually (without using sort()).
+```
+Enter numbers: 5, 3, 8, 1, 9
+```
+2. Write a program that takes two lists and prints the common elements.
+```
+list1 = [1, 2, 3, 4, 5]
+list2 = [4, 5, 6, 7, 8]
+```
+Output
+```
+Common elements: [4, 5]
+```
+
+3. Check If a String is a Palindrome
+```
+is_palindrome("madam")
+```
+Output
+```
+True
+```
+
+4. Write a function that prints a word pyramid where each level contains an increasing number of characters.
+```
+word_pyramid("PYTHON")
+```
+Output
+```
+P
+PY
+PYT
+PYTH
+PYTHO
+PYTHON
+```
+5. Write a function that decodes a message where each letter is replaced by its position in the alphabet.
+```
+d = {'a': 1, 'b': 2, ..., 'z': 26}
+```
+```
+decode_message("8 5 12 12 15")
+```
+Output
+```
+HELLO
+```
+
+6. Extract the last 3 elements of a list.
+7. Reverse a string using slicing.
+8. Get every second character of "PythonProgramming".
+9. Modify [1, 2, 3, 4, 5] to [1, 9, 8, 4, 5] using slicing.
+10. Delete the first two elements from a list using slicing.
+11. Write a Python program that:
+
+- Takes name and marks of students from user input.
+- Writes the data to a file.
+- WReads the file and displays the student records.
+
+--- Cell 301 (code) ---
+import string
+
+def generate_alphabet_dict():
+    alphabet_dict = {}
+    for i, char in enumerate(string.ascii_lowercase, 1):
+        alphabet_dict[i] = char
+    return alphabet_dict
+
+alphabet_dict = generate_alphabet_dict()
+
+--- Cell 302 (code) ---
+def decode_message(n):
+    stri = ""
+    for i in n.split(" "):
+        stri += alphabet_dict[int(i)]
+    return stri
+
+--- Cell 303 (code) ---
+print(decode_message("8 5 12 12 15"))
+
+--- Cell 304 (code) ---
+def write_students(filename):
+    with open(filename, "w") as file:
+        while True:
+            name = input("Enter student name (or 'exit' to stop): ")
+            if name.lower() == "exit":
+                break
+            marks = input("Enter marks: ")
+            file.write(f"{name} - {marks}\n")
+
+def read_students(filename):
+    with open(filename, "r") as file:
+        print("\nStudent Records:")
+        print(file.read())
+
+filename = "students.txt"
+write_students(filename)
+read_students(filename)
+
