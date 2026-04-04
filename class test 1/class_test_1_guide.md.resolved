@@ -1,0 +1,1233 @@
+# 📘 Class Test 1 — Python Fundamentals Complete Guide
+
+> **Course:** CSE 3812 — Artificial Intelligence Laboratory  
+> **File:** `Class_Test_1 (1).ipynb`  
+> **Covers:** Python basics from variables to file I/O
+
+---
+
+## Table of Contents
+
+1. [Google Colab Introduction](#1-google-colab-introduction)
+2. [Variables & Dynamic Typing](#2-variables--dynamic-typing)
+3. [Type Casting](#3-type-casting)
+4. [Print Formatting](#4-print-formatting)
+5. [Arithmetic Operators](#5-arithmetic-operators)
+6. [User Input](#6-user-input)
+7. [Conditional Statements](#7-conditional-statements)
+8. [Logical Operators](#8-logical-operators)
+9. [Loops (for, while)](#9-loops-for-while)
+10. [Lists](#10-lists)
+11. [Tuples](#11-tuples)
+12. [Slicing](#12-slicing)
+13. [Dictionaries](#13-dictionaries)
+14. [Functions](#14-functions)
+15. [File I/O](#15-file-io)
+16. [Practice Problems](#16-practice-problems)
+
+---
+
+## 1. Google Colab Introduction
+
+### What is Google Colab?
+
+- **Google Colab (Colaboratory)** is a **free cloud-based Jupyter Notebook** environment.
+- You can write and run **Python code** directly in your browser — **no installation needed**.
+- It runs on Google's servers, so your computer doesn't need to be powerful.
+
+### Why Use It?
+
+| Benefit | Explanation |
+|---------|-------------|
+| Runs in the Cloud | No setup — just open a browser |
+| Free GPUs & TPUs | Access powerful hardware for ML/AI tasks |
+| Auto-Saves | Notebooks save automatically to Google Drive |
+| Easy to Share | Share like a Google Doc |
+
+---
+
+## 2. Variables & Dynamic Typing
+
+### What is a Variable?
+
+A variable is a **name** that stores a **value** in memory.
+
+### Dynamic Typing
+
+Python is **dynamically typed** — you **don't** declare types. Python figures it out automatically.
+
+```python
+x = 10          # x is an integer (int)
+print(type(x))  # <class 'int'>
+
+x = "Hello"     # Now x is a string (str) — same variable, different type!
+print(type(x))  # <class 'str'>
+
+x = 3.14        # Now x is a float
+print(type(x))  # <class 'float'>
+```
+
+**Key point:** The same variable can hold different types at different times.
+
+### Object Identity (`id()`)
+
+```python
+a = 5
+b = 5
+print(id(a), id(b))  # Same ID! Python reuses the same object for small integers
+```
+
+- `id()` returns the **memory address** of an object.
+- For small integers (-5 to 256), Python **caches** them — so `a` and `b` point to the **same object**.
+
+```python
+a = 10
+print(id(a), id(b))  # Now different IDs — a points to 10, b still points to 5
+```
+
+### String Immutability
+
+```python
+name = "sahid"
+name[0] = "R"   # ❌ ERROR! Strings are IMMUTABLE (cannot change individual characters)
+```
+
+- You **cannot** modify a string in-place.
+- You must create a **new** string instead: `name = "R" + name[1:]`
+
+### Iterating Over a String
+
+```python
+n = "sahid"
+for char in n:
+    print(char)
+# Output: s, a, h, i, d (one per line)
+```
+
+---
+
+## 3. Type Casting
+
+### Implicit Casting (Automatic)
+
+Python **automatically** converts types when mixing them:
+
+```python
+a = 5      # int
+b = 2.5    # float
+c = a + b  # Python converts a to float automatically
+print(c)       # 7.5
+print(type(c)) # <class 'float'>
+```
+
+**Rule:** `int + float → float` (Python promotes to the "bigger" type)
+
+### Explicit Casting (Manual)
+
+You **manually** convert types using built-in functions:
+
+```python
+x = "10"    # This is a STRING, not a number
+y = "5"
+print(x + y)  # "105" — string concatenation, NOT addition!
+
+# Fix: Convert to int first
+y = int(x)     # str → int
+z = float(y)   # int → float
+a = str(200)   # int → str
+```
+
+| Function | What it does | Example |
+|----------|-------------|---------|
+| `int()` | Convert to integer | `int("10")` → `10` |
+| `float()` | Convert to float | `float(5)` → `5.0` |
+| `str()` | Convert to string | `str(200)` → `"200"` |
+| `bool()` | Convert to boolean | `bool(1)` → `True` |
+
+### String Operations
+
+```python
+a = 'mustakim'
+x = 500
+s = a + str(x)   # "mustakim500" — must convert int to str first
+print(a * 3)      # "mustakimmustakimmustakim" — string repetition
+```
+
+### Swapping Variables
+
+```python
+a, b = 10, 20
+a, b = b, a       # Python's elegant swap — no temp variable needed!
+print(a, b)        # 20, 10
+```
+
+---
+
+## 4. Print Formatting
+
+### Basic `print()`
+
+```python
+print("Hello, World!", 100)          # Multiple values separated by space
+print("Name:", name, "Age:", age)    # Automatically adds spaces between arguments
+```
+
+### `sep` and `end` Parameters
+
+```python
+print("Python", "is", "awesome", sep="->")  # Python->is->awesome
+print("Hello", end=" ")                       # Doesn't add newline at the end
+print("World!")                               # Prints on same line: Hello World!
+```
+
+### f-strings (Recommended — Python 3.6+)
+
+```python
+name = "Ratul"
+age = 30
+print(f"My name is {name} and I am {age} years old.")
+```
+
+### `.format()` Method
+
+```python
+print("My name is {} and I am {} years old.".format(name, age))
+```
+
+### `%` Formatting (Old Style)
+
+```python
+print("My name is %s and I am %d years old." % (name, age))
+# %s = string, %d = integer, %f = float
+```
+
+---
+
+## 5. Arithmetic Operators
+
+```python
+a = 10
+b = 3
+```
+
+| Operator | Name | Example | Result |
+|----------|------|---------|--------|
+| `+` | Addition | `a + b` | `13` |
+| `-` | Subtraction | `a - b` | `7` |
+| `*` | Multiplication | `a * b` | `30` |
+| `/` | Division | `a / b` | `3.333...` |
+| `//` | Floor Division | `a // b` | `3` |
+| `%` | Modulus (remainder) | `a % b` | `1` |
+| `**` | Exponentiation | `a ** b` | `1000` |
+
+### Special Case: Negative Modulus
+
+```python
+print(-10 % 3)  # Output: 2 (Python keeps remainder positive)
+```
+
+> In C/Java, `-10 % 3 = -1`. Python is different — it always returns a **non-negative** remainder.
+
+### Ceil Division (Rounding Up)
+
+```python
+import math
+ceil_div = math.ceil(a / b)    # math.ceil(3.33) = 4
+
+# Manual formula (no import needed):
+ceil_div = (a + b - 1) // b    # (10 + 3 - 1) // 3 = 12 // 3 = 4
+```
+
+### Class Work Example
+
+```python
+x = 5
+y = 2
+result = (x + y) * (x - y) / y
+# = (7) * (3) / 2 = 21 / 2 = 10.5
+print("Result:", result)  # Result: 10.5
+```
+
+---
+
+## 6. User Input
+
+### Basic Input (Always Returns String)
+
+```python
+a = input()           # User types "5" → a = "5" (STRING, not int!)
+```
+
+### Converting Input
+
+```python
+a = int(input('Enter a number: '))      # Convert to integer
+b = int(input('Enter another number: '))
+print(a + b)                             # Now does math, not string concat
+```
+
+### Multiple Types
+
+```python
+name = input("Enter your name: ")                                    # str
+age = int(input("Enter your age: "))                                 # int
+height = float(input("Enter your height: "))                         # float
+is_student = bool(int(input("Are you a student? (1/0): ")))         # bool
+```
+
+> [!WARNING]
+> `input()` **always** returns a string. You **must** cast it to `int`, `float`, etc. if you want to do math.
+
+---
+
+## 7. Conditional Statements
+
+### `if`, `elif`, `else`
+
+```python
+age = 16
+if age >= 18:
+    print("You are an adult.")
+else:
+    print("You are a minor.")
+```
+
+> [!IMPORTANT]
+> Python uses **indentation** (4 spaces or 1 tab) instead of curly braces `{}`. **Indentation is mandatory.**
+
+### Multiple Conditions with `elif`
+
+```python
+marks = 75
+
+if marks >= 90:
+    print("Grade: A")
+elif marks >= 80:
+    print("Grade: B")
+elif marks >= 70:
+    print("Grade: C")    # ← This prints (75 >= 70)
+else:
+    print("Grade: F")
+```
+
+### Nested `if`
+
+```python
+num = 10
+if num > 0:
+    print("Positive Number")
+    if num % 2 == 0:
+        print("Even Number")    # Both print — 10 is positive AND even
+```
+
+### Ternary (One-Line) `if`
+
+```python
+age = 20
+status = "Adult" if age >= 18 else "Minor"
+print(status)  # "Adult"
+```
+
+---
+
+## 8. Logical Operators
+
+| Operator | Meaning | Example |
+|----------|---------|---------|
+| `and` | Both must be True | `age >= 18 and has_ID` |
+| `or` | At least one must be True | `a == 2 or a >= 1` |
+| `not` | Reverse the boolean | `not is_raining` |
+
+```python
+age = 25
+has_ID = True
+if age >= 18 and has_ID:
+    print("Allowed to enter.")    # ✅ Both conditions True
+```
+
+### `is` vs `==`
+
+| Operator | Checks | Example |
+|----------|--------|---------|
+| `==` | **Value** equality | `a == b` → Are values the same? |
+| `is` | **Identity** (same object in memory) | `a is b` → Same memory location? |
+
+```python
+a = "hello world"
+b = "".join(["hello", " world"])
+
+print(a == b)   # True — same value
+print(a is b)   # False — different objects in memory!
+```
+
+> [!CAUTION]
+> Never use `is` to compare values. Use `==` instead. `is` is only reliable for `None` checks: `if x is None`.
+
+---
+
+## 9. Loops (for, while)
+
+### `for` Loop with `range()`
+
+```python
+for i in range(5):          # 0, 1, 2, 3, 4
+    print("Iteration:", i)
+
+for i in range(2, 5):       # 2, 3, 4 (start=2, stop=5)
+    print(i)
+
+for i in range(0, 10, 2):   # 0, 2, 4, 6, 8 (step=2)
+    print(i)
+```
+
+**`range(start, stop, step)`** — `stop` is **exclusive** (never included).
+
+### `while` Loop
+
+```python
+x = 1
+while x <= 5:
+    print(x)
+    x += 1      # Don't forget this or you get an INFINITE LOOP!
+```
+
+### `break` and `continue`
+
+```python
+# break — exits the loop entirely
+for i in range(5):
+    if i == 3:
+        break       # STOP! Exit loop at 3
+    print(i)        # Output: 0, 1, 2
+
+# continue — skips current iteration, goes to next
+for i in range(5):
+    if i == 2:
+        continue    # SKIP 2, continue with 3
+    print(i)        # Output: 0, 1, 3, 4
+```
+
+### Nested Loops
+
+```python
+for outer in range(3):
+    for inner in range(2):
+        print(f"Outer: {outer}, Inner: {inner}")
+# Outer: 0, Inner: 0
+# Outer: 0, Inner: 1
+# Outer: 1, Inner: 0
+# ... (6 total)
+```
+
+### Increment/Decrement
+
+> [!WARNING]
+> Python does **NOT** support `n++`, `n--`, `++n`, `--n`. Use `n += 1` and `n -= 1` instead.
+
+### Tricky While Loop Problem
+
+```python
+n = 0
+while True:
+    print(n)     # Prints: 0, 1, 2, 3, 4
+    n += 1       # n=1
+    n = n+1      # n=2
+    n = n-1      # n=1
+    n -= 1       # n=0
+    n *= 2       # n=0
+    n /= 2       # n=0.0
+    n += 1       # n=1.0
+    if n == 5: break
+```
+
+The net effect per iteration: `n` ends up as `n_prev + 1`. So it prints `0, 1, 2, 3, 4` and breaks when `n == 5`.
+
+### Bonus: Star Pattern
+
+```python
+rows = 5
+for i in range(1, rows + 1):
+    print("* " * i)
+# *
+# * *
+# * * *
+# * * * *
+# * * * * *
+```
+
+### Bonus: Fibonacci Sequence
+
+```python
+a, b = 0, 1
+print(f"{a},{b},", end="")
+for i in range(1, rows + 1):
+    next = a + b
+    print(next, end="")
+    if i != rows:
+        print(",", end="")
+    a = b
+    b = next
+# 0,1,1,2,3,5,8,...
+```
+
+---
+
+## 10. Lists
+
+### What is a List?
+
+A **list** is a dynamic, ordered, mutable collection in Python. It can hold **any data type**.
+
+```python
+my_list = [1, 2, 3, 4, 5]
+mixed_list = [10, "Python", 3.14, True]    # Mixed types allowed!
+```
+
+### Adding Elements
+
+| Method | What it does | Example |
+|--------|-------------|---------|
+| `append(x)` | Add `x` at the **end** | `my_list.append(4)` |
+| `insert(i, x)` | Add `x` at index `i` | `my_list.insert(1, "Hello")` |
+| `extend(list)` | Add all elements from another list | `my_list.extend([5, 6, 7])` |
+
+### Removing Elements
+
+| Method | What it does | Example |
+|--------|-------------|---------|
+| `pop()` | Remove & return **last** element | `my_list.pop()` |
+| `pop(i)` | Remove & return element at index `i` | `my_list.pop(1)` |
+| `remove(x)` | Remove **first occurrence** of `x` | `my_list.remove(30)` |
+| `clear()` | Remove **all** elements | `my_list.clear()` |
+
+### Iterating
+
+```python
+fruits = ["Apple", "Banana", "Cherry"]
+
+# Simple iteration
+for fruit in fruits:
+    print(fruit)
+
+# With index using enumerate()
+for index, fruit in enumerate(fruits):
+    print(index, "->", fruit)
+# 0 -> Apple
+# 1 -> Banana
+# 2 -> Cherry
+
+# Start index from 1
+for i, fruit in enumerate(fruits, start=1):
+    print(i, fruit)
+```
+
+### Sorting & Reversing
+
+```python
+nums = [5, 2, 8, 1, 3]
+nums.sort()               # [1, 2, 3, 5, 8] — ascending
+nums.sort(reverse=True)   # [8, 5, 3, 2, 1] — descending
+nums.reverse()            # [1, 2, 3, 5, 8] — reverses in-place
+```
+
+### Copying a List
+
+```python
+original = [1, 2, 3]
+copy1 = original          # ⚠️ SHALLOW COPY — both point to SAME list!
+copy2 = original.copy()   # ✅ REAL COPY — independent list
+
+copy1[0] = 100
+print(original)  # [100, 2, 3] — original ALSO changed!
+print(copy2)     # [1, 2, 3]   — copy2 is independent
+```
+
+> [!CAUTION]
+> `copy1 = original` does **NOT** create a new list! Both variables point to the same list in memory. Use `.copy()` for a real copy.
+
+### Checking Membership
+
+```python
+print("Apple" in fruits)       # True
+print("Mango" not in fruits)   # True
+```
+
+### 2D Lists (Matrix)
+
+```python
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+# Print entire matrix nicely
+for row in matrix:
+    for element in row:
+        print(element, end=" ")
+    print()
+# 1 2 3
+# 4 5 6
+# 7 8 9
+```
+
+### Memory Size
+
+```python
+import sys
+arr = []
+print(sys.getsizeof(arr))      # ~56 bytes (empty list has overhead)
+arr.append(1)
+print(sys.getsizeof(arr))      # ~88 bytes (list + one element pointer)
+```
+
+A Python list stores **pointers** to objects, not the objects themselves. This is why it's flexible but uses more memory than C arrays.
+
+### List Object Internal Structure
+
+```
+List Object
+├── length          → number of elements currently stored
+├── capacity        → allocated slots before resizing
+├── pointer to data → address of array storing element pointers
+└── type info       → tells Python this is a list
+```
+
+### `join()` for Converting Lists to Strings
+
+```python
+numbers = [1, 2, 3, 4]
+result = ",".join([str(num) for num in numbers])
+print(result)  # "1,2,3,4"
+
+# For 2D lists:
+numbers = [[1, 2, 3], [4, 2]]
+result = "\n".join([",".join([str(num) for num in row]) for row in numbers])
+print(result)
+# 1,2,3
+# 4,2
+```
+
+---
+
+## 11. Tuples
+
+### What is a Tuple?
+
+A tuple is like a list but **immutable** — once created, you **cannot** change it.
+
+```python
+my_tuple = (10, 20, 30)
+my_tuple = 1, 2, 3        # Parentheses are optional
+```
+
+### Key Characteristics
+
+| Feature | Tuple | List |
+|---------|-------|------|
+| Syntax | `( )` | `[ ]` |
+| Mutable? | ❌ No | ✅ Yes |
+| Ordered? | ✅ Yes | ✅ Yes |
+| Duplicates? | ✅ Yes | ✅ Yes |
+| Speed | ✅ Faster | ❌ Slower |
+
+### Single-Element Tuple Gotcha
+
+```python
+single_tuple = (5,)     # ✅ This IS a tuple (note the comma)
+print(type(single_tuple))  # <class 'tuple'>
+
+not_a_tuple = (5)        # ❌ This is just an integer!
+print(type(not_a_tuple))   # <class 'int'>
+```
+
+> [!WARNING]
+> A single-element tuple **must** have a trailing comma: `(5,)`. Without it, `(5)` is just `5`.
+
+### Accessing Elements
+
+```python
+fruits = ("apple", "banana", "cherry")
+print(fruits[0])    # "apple"
+print(fruits[-1])   # "cherry" (negative indexing = from the end)
+```
+
+### Immutability
+
+```python
+my_tuple = (1, 2, 3)
+my_tuple[1] = 5   # ❌ TypeError! Tuples cannot be modified!
+```
+
+### Tuple Operations
+
+```python
+tuple1 = (1, 2, 3)
+tuple2 = (4, 5, 6)
+result = tuple1 + tuple2   # (1, 2, 3, 4, 5, 6) — concatenation
+```
+
+### Tuple Methods
+
+```python
+numbers = (10, 20, 30, 20, 40)
+print(numbers.count(20))   # 2 — how many times 20 appears
+print(numbers.index(30))   # 2 — index of first occurrence of 30
+```
+
+### Tuple Unpacking
+
+```python
+person = "SHM", 25, "Engineer"
+name, age, profession = person   # Unpack into separate variables
+print(name)         # "SHM"
+print(age)          # 25
+print(profession)   # "Engineer"
+```
+
+### `enumerate()` Function
+
+`enumerate()` adds a **counter** to any iterable, returning tuples of `(index, value)`:
+
+```python
+fruits = ["Apple", "Banana", "Cherry"]
+for index, fruit in enumerate(fruits, start=1):
+    print(index, "->", fruit)
+# 1 -> Apple
+# 2 -> Banana
+# 3 -> Cherry
+```
+
+**How `enumerate()` works internally:**
+
+```python
+def my_enumerate(iterable, start=0):
+    index = start
+    for item in iterable:
+        yield index, item   # yield = return one at a time (generator)
+        index += 1
+```
+
+---
+
+## 12. Slicing
+
+### Syntax
+
+```
+sequence[start:stop:step]
+```
+
+| Parameter | Default | Meaning |
+|-----------|---------|---------|
+| `start` | `0` | Where to begin (inclusive) |
+| `stop` | end | Where to stop (exclusive) |
+| `step` | `1` | How many to skip |
+
+### Basic Examples
+
+```python
+numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+print(numbers[2:5])   # [2, 3, 4]     — index 2 to 4
+print(numbers[:4])     # [0, 1, 2, 3]  — from start to index 3
+print(numbers[5:])     # [5, 6, 7, 8, 9] — from index 5 to end
+print(numbers[:])      # [0, 1, 2, ..., 9] — full copy
+```
+
+### Step
+
+```python
+print(numbers[::2])    # [0, 2, 4, 6, 8] — every 2nd element
+print(numbers[::3])    # [0, 3, 6, 9]    — every 3rd element
+```
+
+### Negative Indexing
+
+```python
+print(numbers[-3:])    # [7, 8, 9]  — last 3 elements
+print(numbers[:-2])    # [0, 1, ..., 7] — everything except last 2
+print(numbers[::-1])   # [9, 8, 7, ..., 0] — REVERSED!
+print(numbers[::-2])   # [9, 7, 5, 3, 1] — reversed, every 2nd
+```
+
+### String Slicing
+
+```python
+text = "PythonSlicing"
+print(text[0:6])    # "Python"
+print(text[::2])    # "PtoSiig"
+print(text[::-1])   # "gnicilSnohtyP" — reversed
+```
+
+### Modifying Lists with Slicing
+
+```python
+nums = [1, 2, 3, 4, 5]
+nums[1:3] = [9, 8]     # Replace index 1-2 with [9, 8]
+print(nums)             # [1, 9, 8, 4, 5]
+
+nums = [1, 2, 3, 4, 5]
+del nums[1:3]           # Delete index 1-2
+print(nums)             # [1, 4, 5]
+```
+
+### Slicing Tuples (Read-Only)
+
+```python
+numbers = (10, 20, 30, 40, 50)
+print(numbers[1:4])    # (20, 30, 40)
+print(numbers[::-1])   # (50, 40, 30, 20, 10)
+```
+
+> Tuples support slicing for **reading** but NOT for **modifying** (because they're immutable).
+
+---
+
+## 13. Dictionaries
+
+### What is a Dictionary?
+
+A **dictionary** stores **key-value pairs**. Keys must be **unique** and **immutable**.
+
+```python
+student = {
+    "name": "SHM",
+    "age": 95,
+    "grade": "F"
+}
+
+# Alternative syntax:
+student = dict(name="SHM", age=20, grade="A")
+```
+
+### Accessing Values
+
+```python
+print(student["name"])               # "SHM" — raises KeyError if key not found
+print(student.get("age"))            # 95
+print(student.get("gender", "N/A"))  # "N/A" — safe, returns default if not found
+```
+
+### Modifying
+
+```python
+student["age"] = 21          # Update existing key
+student["city"] = "Dhaka"    # Add new key
+del student["grade"]         # Delete a key
+```
+
+### Iterating
+
+```python
+# Keys only
+for key in student:
+    print(key, "->", student[key])
+
+# Values only
+for value in student.values():
+    print(value)
+
+# Both keys and values
+for key, value in student.items():
+    print(key, "->", value)
+```
+
+### Useful Methods
+
+| Method | Returns | Example |
+|--------|---------|---------|
+| `.keys()` | All keys | `student.keys()` |
+| `.values()` | All values | `student.values()` |
+| `.items()` | All (key, value) pairs | `student.items()` |
+| `.pop(key)` | Removes & returns value for key | `student.pop("age")` |
+| `.popitem()` | Removes & returns last pair | `student.popitem()` |
+| `.update(dict2)` | Merge dict2 into dict | `dict1.update(dict2)` |
+
+### Dictionary Comprehension
+
+```python
+squares = {x: x*x for x in range(1, 6)}
+# {1: 1, 2: 4, 3: 9, 4: 16, 5: 25}
+
+grades = {"Sahid": 85, "Hossain": 70, "Ratul": 90}
+passed = {k: v for k, v in grades.items() if v > 75}
+# {"Sahid": 85, "Ratul": 90}
+```
+
+### Nested Dictionaries
+
+```python
+students = {
+    "Sahid": {"age": 20, "grade": "A"},
+    "Ratul": {"age": 22, "grade": "B"}
+}
+
+print(students["Sahid"]["age"])  # 20
+
+for student, details in students.items():
+    print(f"Student: {student}")
+    for key, value in details.items():
+        print(f"  {key}: {value}")
+```
+
+### Mixed Value Types
+
+```python
+students = {
+    "Sahid": {"age": 20, "grade": "A"},   # dict value
+    "Ratul": [1, 2, 3],                    # list value
+    "Mustakim": 4                           # int value
+}
+
+for name, details in students.items():
+    if isinstance(details, dict):
+        # handle dict
+    elif isinstance(details, list):
+        # handle list
+    else:
+        # handle simple value
+```
+
+### Frequency Counter (Important Pattern!)
+
+```python
+sentence = "I study in UIU"
+freq = {}
+
+for i in range(len(sentence)):
+    char = sentence[i]
+    if char not in freq:
+        freq[char] = 0
+    freq[char] += 1
+
+# Sort and display
+sorted_freq = dict(sorted(freq.items()))
+for char, count in sorted_freq.items():
+    print(f"{char}: {count}")
+```
+
+---
+
+## 14. Functions
+
+### Basic Function
+
+```python
+def sum(a, b):
+    return a + b
+
+print(sum(3, 4))     # 7
+print(sum('a', 'b')) # "ab" — Python is dynamically typed!
+```
+
+### Function with No Return
+
+```python
+def hello(name):
+    name = name.capitalize()
+    print('Hello,', name)
+
+hello('ratul')  # Hello, Ratul
+```
+
+### Multiple Return Values
+
+```python
+def minmax(arr):
+    return min(arr), max(arr)   # Returns a TUPLE
+
+min_, max_ = minmax([1, 0, 9, 8, -1])
+print(f'min: {min_}, max: {max_}')  # min: -1, max: 9
+```
+
+### Default Parameter Values
+
+```python
+def canvote(age=0):   # Default age is 0
+    if age >= 18:
+        return True
+    else:
+        return False
+
+print(canvote())      # False (uses default age=0)
+print(canvote(21))    # True
+```
+
+### Keyword Arguments
+
+```python
+print(canvote(age=31))  # Can specify parameter by name
+```
+
+> [!WARNING]
+> Rules:
+> - Positional args must come **before** keyword args.
+> - Parameters with defaults must come **after** those without.
+
+### `*args` (Variable Positional Arguments)
+
+```python
+def add_numbers(*args):
+    return sum(args)    # args is a TUPLE
+
+print(add_numbers(2, 3))           # 5
+print(add_numbers(1, 2, 3, 4))    # 10
+
+# Unpack a list
+numbers = [1, 2, 3, 4]
+print(add_numbers(*numbers))       # 10
+```
+
+### `**kwargs` (Variable Keyword Arguments)
+
+```python
+def print_details(**kwargs):
+    for key, value in kwargs.items():
+        print(f"{key}: {value}")
+
+print_details(name="SHM", age=25, city="Dhaka")
+# name: SHM
+# age: 25
+# city: Dhaka
+
+# Unpack a dictionary
+info = {'name': 'Ratul', 'age': 30}
+print_details(**info)
+```
+
+### Combined Example
+
+```python
+def full_function(a, b, *args, **kwargs):
+    print(f"a: {a}, b: {b}")
+    print("args:", args)
+    print("kwargs:", kwargs)
+
+full_function(1, 2, 3, 4, 5, name="Messi", age=36)
+# a: 1, b: 2
+# args: (3, 4, 5)
+# kwargs: {'name': 'Messi', 'age': 36}
+```
+
+### Summary Table
+
+| Syntax | Type | Collected As |
+|--------|------|-------------|
+| `*args` | Positional | Tuple |
+| `**kwargs` | Keyword | Dictionary |
+| `*list` | Unpacking list | Individual args |
+| `**dict` | Unpacking dict | Keyword args |
+
+---
+
+## 15. File I/O
+
+### Opening Files
+
+```python
+file = open("filename.txt", mode)
+```
+
+| Mode | Meaning | Creates file? | Erases existing? |
+|------|---------|:-------------:|:----------------:|
+| `"r"` | Read (default) | ❌ | ❌ |
+| `"w"` | Write | ✅ | ✅ Yes! |
+| `"a"` | Append | ✅ | ❌ |
+| `"x"` | Exclusive create | ✅ (fails if exists) | ❌ |
+| `"b"` | Binary mode | — | — |
+| `"+"` | Read + Write | — | — |
+
+### Reading Files
+
+```python
+# Read entire file
+file = open("example.txt", "r")
+content = file.read()
+print(content)
+file.close()
+
+# Read first 10 characters
+content = file.read(10)
+
+# Read one line
+line = file.readline()
+
+# Read all lines into a list
+lines = file.readlines()   # ["line1\n", "line2\n", ...]
+clean = [line.strip() for line in lines]  # Remove \n
+```
+
+### Writing Files
+
+```python
+# Write (creates/overwrites)
+file = open("example.txt", "w")
+file.write("Hello, world!\n")
+file.close()
+
+# Append (adds to end)
+file = open("example.txt", "a")
+file.write("This is new content.")
+file.close()
+```
+
+### Using `with` Statement (Recommended!)
+
+```python
+with open("example.txt", "r") as file:
+    content = file.read()
+    print(content)
+# File is AUTOMATICALLY closed after the block — no need for file.close()
+```
+
+> [!TIP]
+> Always use `with` for file operations. It automatically handles closing the file, even if an error occurs.
+
+### Checking & Deleting Files
+
+```python
+import os
+
+if os.path.exists("example.txt"):
+    os.remove("example.txt")
+    print("File deleted!")
+```
+
+### Error Handling
+
+```python
+try:
+    with open("example.txt", "r") as file:
+        print(file.read())
+except FileNotFoundError:
+    print("File does not exist!")
+except Exception as e:
+    print(f"An error occurred: {e}")
+```
+
+### Practical Examples
+
+**Count Words in a File:**
+
+```python
+def count_words(filename):
+    with open(filename, "r") as file:
+        text = file.read()
+        words = text.split()       # Split by whitespace
+        print("Total words:", len(words))
+
+count_words("text.txt")  # Total words: 10
+```
+
+**Find Longest Word:**
+
+```python
+def find_longest_word(filename):
+    with open(filename, "r") as file:
+        words = file.read().split()
+        longest = max(words, key=len)   # key=len → compare by length
+        print("Longest word:", longest)
+```
+
+**Search for a Word:**
+
+```python
+def search_word(filename, word):
+    with open(filename, "r") as file:
+        lines = file.readlines()
+    for i, line in enumerate(lines, start=1):
+        if word in line:
+            print(f"Found '{word}' on line {i}")
+```
+
+---
+
+## 16. Practice Problems
+
+Here are the practice problems from the notebook:
+
+1. **Manual Sort** — Sort a list in ascending order **without** using `sort()`.
+2. **Common Elements** — Find common elements between two lists.
+3. **Palindrome Check** — Check if a string reads the same forwards and backwards.
+4. **Word Pyramid** — Print increasing substrings of a word.
+5. **Decode Message** — Convert numbers (alphabet positions) back to letters.
+6. **Last 3 Elements** — Extract using slicing: `my_list[-3:]`
+7. **Reverse String** — Using slicing: `text[::-1]`
+8. **Every 2nd Character** — `"PythonProgramming"[::2]`
+9. **Modify with Slicing** — `nums[1:3] = [9, 8]`
+10. **Delete First Two** — `del nums[:2]`
+11. **Student Records** — Read/write student data to a file.
+
+### Solution: Decode Message
+
+```python
+import string
+
+def generate_alphabet_dict():
+    alphabet_dict = {}
+    for i, char in enumerate(string.ascii_lowercase, 1):
+        alphabet_dict[i] = char
+    return alphabet_dict
+
+alphabet_dict = generate_alphabet_dict()
+
+def decode_message(n):
+    result = ""
+    for i in n.split(" "):
+        result += alphabet_dict[int(i)]
+    return result
+
+print(decode_message("8 5 12 12 15"))  # "hello"
+```
+
+### Solution: Student Records
+
+```python
+def write_students(filename):
+    with open(filename, "w") as file:
+        while True:
+            name = input("Enter student name (or 'exit'): ")
+            if name.lower() == "exit":
+                break
+            marks = input("Enter marks: ")
+            file.write(f"{name} - {marks}\n")
+
+def read_students(filename):
+    with open(filename, "r") as file:
+        print("\nStudent Records:")
+        print(file.read())
+
+filename = "students.txt"
+write_students(filename)
+read_students(filename)
+```
+
+---
+
+## 🧠 Quick Revision Cheat Sheet
+
+| Topic | Key Thing to Remember |
+|-------|-----------------------|
+| Variables | No type declaration needed. `type()` to check. |
+| Strings | **Immutable** — can't change individual characters. |
+| `input()` | Always returns **string**. Cast with `int()`, `float()`. |
+| Lists | **Mutable**, use `[]`, supports all operations. |
+| Tuples | **Immutable**, use `()`, faster than lists. |
+| Single tuple | Must have comma: `(5,)` not `(5)`. |
+| Dicts | Key-value pairs, keys must be unique & immutable. |
+| `=` assignment | Lists: creates **reference**, not copy. Use `.copy()`. |
+| `==` vs `is` | `==` checks value, `is` checks identity (memory). |
+| Slicing | `[start:stop:step]`, stop is **exclusive**. |
+| `[::-1]` | Reverses any sequence. |
+| `*args` | Collects extra positional args as **tuple**. |
+| `**kwargs` | Collects extra keyword args as **dictionary**. |
+| File `"w"` | **Overwrites** existing content! |
+| File `"a"` | **Appends** to end. |
+| `with open()` | Auto-closes file. Always prefer this. |
+| `enumerate()` | Gives `(index, value)` pairs. |
+| `%` in Python | Always non-negative result (unlike C/Java). |
+
+---
+
+> **Good luck with your test! 🍀** Focus on understanding *why* things work, not just memorizing syntax.

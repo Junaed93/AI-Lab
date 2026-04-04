@@ -1,0 +1,406 @@
+# A* Search Algorithm — Study Guide
+
+Based on: [0112330072_Astar.py](file:///d:/AI%20lab/assignment1/0112330072_Astar.py)
+
+---
+
+## What is A*?
+
+A* is a **pathfinding algorithm** that finds the shortest (cheapest) path from a **start** node to a **destination** node on a grid.
+
+It uses this formula to decide which node to explore next:
+
+```
+f(n) = g(n) + h(n)
+```
+
+| Term | Meaning |
+|------|---------|
+| `f(n)` | **Total estimated cost** — used to pick the next node |
+| `g(n)` | **Actual cost** from start to current node |
+| `h(n)` | **Heuristic** — estimated cost from current node to destination |
+
+> [!TIP]
+> A* always picks the node with the **lowest f value** to explore next. This is what makes it efficient — it prioritizes nodes that look promising.
+
+---
+
+## Function-by-Function Breakdown
+
+---
+
+### 1. `heuristic(x, y, Dx, Dy)` — Lines 4–5
+
+```python
+def heuristic(x, y, Dx, Dy):
+    return math.sqrt((x - Dx)**2 + (y - Dy)**2)
+```
+
+**What it does:** Calculates the **Euclidean distance** (straight-line distance) between the current position `(x, y)` and the destination `(Dx, Dy)`.
+
+**Why:** This is our `h(n)` — the estimated remaining cost. It helps A* prioritize nodes that are **closer** to the goal.
+
+**Example:**
+```
+Current = (0, 0), Destination = (3, 3)
+h = √((0-3)² + (0-3)²) = √(9 + 9) = √18 ≈ 4.24
+```
+
+---
+
+### 2. `get_neighbors(x, y, grid, N)` — Lines 7–22
+
+```python
+def get_neighbors(x, y, grid, N):
+    directions = [
+        (-1,0),(1,0),(0,-1),(0,1),       # Up, Down, Left, Right
+        (-1,-1),(-1,1),(1,-1),(1,1)       # Diagonals
+    ]
+
+    neighbors = []
+
+    for dx, dy in directions:
+        nx = x + dx
+        ny = y + dy
+
+        if 0 <= nx < N and 0 <= ny < N and grid[nx][ny] != -1:
+            neighbors.append((nx, ny))
+
+    return neighbors
+```
+
+**What it does:** Returns all **valid neighboring cells** of position `(x, y)`.
+
+**Rules for a valid neighbor:**
+1. Must be **inside the grid** (`0 <= nx < N` and `0 <= ny < N`)
+2. Must **not be a wall** (`grid[nx][ny] != -1`)
+
+**8 directions checked:**
+```
+(-1,-1) (-1,0) (-1,1)       ↖  ↑  ↗
+( 0,-1) [x,y]  ( 0,1)   →   ←  ●  →
+( 1,-1) ( 1,0) ( 1,1)       ↙  ↓  ↘
+```
+
+---
+
+### 3. `find_lowest_f(open_list)` — Lines 24–31
+
+```python
+def find_lowest_f(open_list):
+    best_index = 0
+
+    for i in range(len(open_list)):
+        if open_list[i][0] < open_list[best_index][0]:
+            best_index = i
+
+    return best_index
+```
+
+**What it does:** Scans through the `open_list` and finds the **index** of the node with the **smallest f value**.
+
+**Why:** A* always expands the most promising node first (lowest total estimated cost).
+
+**Example:**
+```
+open_list = [(5.2, 2, 1, 0), (3.1, 1, 0, 1), (4.0, 3, 2, 1)]
+                                ↑ smallest f = 3.1 → returns index 1
+```
+
+---
+
+### 4. `reconstruct_path(parent, goal)` — Lines 33–42
+
+```python
+def reconstruct_path(parent, goal):
+    path = []
+    current = goal
+
+    while current is not None:
+        path.append(current)
+        current = parent[current]
+
+    path.reverse()
+    return path
+```
+
+**What it does:** After A* finds the goal, this function **traces back** from the goal to the start using the `parent` dictionary, then **reverses** it to get start → goal order.
+
+**How `parent` works:**
+```
+parent = {
+    (0,0): None,      ← start (no parent)
+    (1,0): (0,0),     ← came from (0,0)
+    (2,1): (1,0),     ← came from (1,0)
+    (3,2): (2,1),     ← came from (2,1)
+    (3,3): (3,2)      ← goal, came from (3,2)
+}
+```
+
+**Tracing:** `(3,3) → (3,2) → (2,1) → (1,0) → (0,0) → None` (stop)
+**After reverse:** `(0,0) → (1,0) → (2,1) → (3,2) → (3,3)` ✅
+
+---
+
+### 5. `a_star(grid, sx, sy, dx, dy)` — Lines 44–81 ⭐ Main Algorithm
+
+```python
+def a_star(grid, sx, sy, dx, dy):
+    N = len(grid)
+
+    open_list = []          # Nodes to explore
+    g_cost = {(sx, sy): 0}  # Cheapest known cost to reach each node
+    parent = {(sx, sy): None}  # Tracks the path
+    visited = set()         # Nodes already fully explored
+```
+
+**Initialization:**
+- `open_list` — nodes waiting to be explored (sorted by f value)
+- `g_cost` — stores the cheapest known cost to reach each cell
+- `parent` — maps each cell to the cell it came from (for path reconstruction)
+- `visited` — prevents re-exploring nodes
+
+```python
+    f_start = heuristic(sx, sy, dx, dy)
+    open_list.append((f_start, 0, sx, sy))
+```
+
+- Calculate f for the start node: `f = 0 + h(start)`
+- Add it to the open list as a tuple: `(f_value, g_cost, x, y)`
+
+#### The Main Loop
+
+```python
+    while open_list:
+        idx = find_lowest_f(open_list)
+        f, g, x, y = open_list.pop(idx)
+```
+
+1. Find the node with the **lowest f** value
+2. **Remove** it from the open list
+
+```python
+        if (x, y) in visited:
+            continue
+        visited.add((x, y))
+```
+
+3. If already visited, **skip** it
+4. Otherwise, mark it as **visited**
+
+```python
+        if (x, y) == (dx, dy):
+            return g, reconstruct_path(parent, (dx, dy))
+```
+
+5. If we reached the **destination**, return the cost and path 🎉
+
+```python
+        for nx, ny in get_neighbors(x, y, grid, N):
+            if (nx, ny) in visited:
+                continue
+
+            new_g = g + grid[nx][ny]
+
+            if (nx, ny) not in g_cost or new_g < g_cost[(nx, ny)]:
+                g_cost[(nx, ny)] = new_g
+                parent[(nx, ny)] = (x, y)
+
+                f_new = new_g + heuristic(nx, ny, dx, dy)
+                open_list.append((f_new, new_g, nx, ny))
+```
+
+6. For each **unvisited neighbor**:
+   - Calculate `new_g` = current cost + cost to step into the neighbor
+   - If this is a **cheaper path** than any previously found, update it
+   - Add the neighbor to the open list with its new f value
+
+```python
+    return None, []
+```
+
+7. If the loop ends without finding the goal → **no path exists**
+
+---
+
+### 6. `print_result(cost, path)` — Lines 83–98
+
+```python
+def print_result(cost, path):
+    if cost is None:
+        print("Optimal Cost: None")
+        print("Optimal Path: []")
+    else:
+        print(f"Optimal Cost: {cost}")
+
+        path_str = ""
+        for i in range(len(path)):
+            if i == 0:
+                path_str += f"({path[i][0]},{path[i][1]})"
+            else:
+                path_str += f"→({path[i][0]},{path[i][1]})"
+
+        print("Optimal Path:")
+        print(path_str)
+```
+
+**What it does:** Prints the result to the **console**.
+
+- If no path found → prints `None` and `[]`
+- If path found → prints cost and the path with `→` arrows
+
+**Example output:**
+```
+Optimal Cost: 4
+Optimal Path:
+(0,0)→(1,0)→(2,1)→(3,2)→(3,3)
+```
+
+---
+
+### 7. `read_input(filename)` — Lines 100–109
+
+```python
+def read_input(filename):
+    with open(filename, 'r') as f:
+        lines = [line.strip() for line in f if line.strip()]
+```
+
+- Opens the file and reads **all non-empty lines** into a list
+- `line.strip()` removes whitespace/newlines from both ends
+- `if line.strip()` skips blank lines
+
+```python
+    N = int(lines[0])
+```
+
+- **Line 1** of the file → grid size `N` (e.g. `4` means 4×4 grid)
+
+```python
+    grid = [list(map(int, lines[i+1].split())) for i in range(N)]
+```
+
+- **Lines 2 to N+1** → the grid rows
+- `lines[i+1].split()` splits `"2 3 1 -1"` into `["2", "3", "1", "-1"]`
+- `map(int, ...)` converts each string to an integer
+- `list(...)` turns the map object into a list `[2, 3, 1, -1]`
+- The outer list comprehension repeats this for all N rows
+
+```python
+    Sx, Sy = map(int, lines[N+1].split())
+    Dx, Dy = map(int, lines[N+2].split())
+```
+
+- **Line N+2** → start coordinates `(Sx, Sy)`
+- **Line N+3** → destination coordinates `(Dx, Dy)`
+- `map(int, ...)` converts both values to integers and **unpacks** them into two variables
+
+```python
+    return grid, Sx, Sy, Dx, Dy
+```
+
+**Example `input.txt`:**
+```
+4              ← N (grid is 4×4)
+1 1 1 -1       ← row 0
+1 -1 1 1       ← row 1
+1 1 1 1        ← row 2
+1 -1 1 1       ← row 3
+0 0            ← start (0,0)
+3 3            ← destination (3,3)
+```
+
+> [!NOTE]
+> **About `map()`:** `map(int, list)` applies the `int()` function to every element in the list. It's equivalent to `[int(x) for x in list]` but slightly more concise. Both approaches work the same way.
+
+---
+
+### 8. `write_output(filename, title, cost, path)` — Lines 111–124
+
+```python
+def write_output(filename, title, cost, path):
+    with open(filename, 'a') as f:
+```
+
+- Opens the file in **append mode** (`'a'`) — adds to the file instead of overwriting
+
+```python
+        f.write(" " + title + " \n")
+        f.write("Optimal Cost: " + str(cost) + "\n")
+```
+
+- Writes a title header (e.g. `" Sample 1 "`)
+- Writes the total path cost
+
+```python
+        if path:
+            f.write("Optimal Path:\n")
+            for i in range(len(path)):
+                f.write(f"({path[i][0]},{path[i][1]})")
+                if i != len(path) - 1:
+                    f.write(" -> ")
+            f.write("\n\n")
+```
+
+- If a path exists, loops through each node
+- Writes each node as `(x,y)`, separated by ` -> `
+- `if i != len(path) - 1` prevents adding ` -> ` after the **last** node
+
+```python
+        else:
+            f.write("Optimal Path: []\n\n")
+```
+
+- If no path was found → writes empty list
+
+**Example `output.txt`:**
+```
+ Sample 1 
+Optimal Cost: 4
+Optimal Path:
+(0,0) -> (1,0) -> (2,1) -> (3,2) -> (3,3)
+```
+
+---
+
+### 9. `__main__` Block — Lines 126–186
+
+```python
+if __name__ == "__main__":
+    open("output.txt", "w").close()     # Clear/create output.txt
+```
+
+This runs the algorithm on **3 hardcoded sample inputs** + **1 file input**:
+
+| Test | Grid | Start | Goal | Purpose |
+|------|------|-------|------|---------|
+| Sample 1 | 4×4, uniform cost (all 1s) | (0,0) | (3,3) | Basic pathfinding with walls |
+| Sample 2 | 4×4, varying costs | (0,0) | (3,3) | Tests weighted pathfinding |
+| Sample 3 | 3×3, heavily blocked | (0,0) | (2,2) | Tests no-path scenario |
+| File Input | From `input.txt` | From file | From file | Custom test case |
+
+---
+
+## Key Data Structures Summary
+
+| Structure | Type | Purpose |
+|-----------|------|---------|
+| `grid` | `list[list[int]]` | The N×N grid. `-1` = wall, positive = movement cost |
+| `open_list` | `list[tuple]` | Nodes to explore: `(f, g, x, y)` |
+| `g_cost` | `dict` | Maps `(x,y)` → cheapest known cost to reach it |
+| `parent` | `dict` | Maps `(x,y)` → previous node (for path reconstruction) |
+| `visited` | `set` | Cells already fully explored |
+
+---
+
+## How A* Differs from Other Algorithms
+
+| Algorithm | Uses g(n)? | Uses h(n)? | Optimal? | Notes |
+|-----------|-----------|-----------|----------|-------|
+| **BFS** | ❌ | ❌ | ✅ (unweighted) | Explores all directions equally |
+| **Dijkstra** | ✅ | ❌ | ✅ | Like A* without the heuristic |
+| **Greedy Best-First** | ❌ | ✅ | ❌ | Fast but can find suboptimal paths |
+| **A*** | ✅ | ✅ | ✅ | Best of both worlds |
+
+> [!IMPORTANT]
+> A* is **guaranteed optimal** as long as the heuristic `h(n)` **never overestimates** the true cost (this is called an "admissible" heuristic). Euclidean distance satisfies this property.
