@@ -1,2 +1,6 @@
 .venv
 __pycache__
+.ipynb_checkpoints
+output.txt
+astar_study_guide.md.resolved
+class_test_1_guide.md.resolved
